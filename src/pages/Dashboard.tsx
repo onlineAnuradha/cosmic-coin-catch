@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Coins, Gift, Rocket, Wallet, Zap, Play } from 'lucide-react';
 import { Progress } from '@/components/ui/progress';
@@ -45,10 +44,21 @@ const Dashboard = () => {
   }, [displayCoins, coins]);
 
   const handleTapToEarn = () => {
-    if (tapCooldown > 0) return;
+    console.log('Tap button clicked!');
+    console.log('Cooldown status:', tapCooldown);
+    
+    if (tapCooldown > 0) {
+      console.log('Tap blocked by cooldown');
+      return;
+    }
+    
+    console.log('Processing tap...');
     
     // Add 1 coin
-    setCoins(prev => prev + 1);
+    setCoins(prev => {
+      console.log('Updating coins from', prev, 'to', prev + 1);
+      return prev + 1;
+    });
     setDailyCoinsEarned(prev => Math.min(prev + 1, dailyCoinTarget));
     setTapCooldown(5); // 5 second cooldown
     
@@ -152,7 +162,7 @@ const Dashboard = () => {
             </h2>
             
             <div className="relative">
-              <Button
+              <button
                 onClick={handleTapToEarn}
                 disabled={!canTap}
                 className={`w-40 h-40 rounded-full text-xl font-bold transition-all duration-300 ${
@@ -173,7 +183,7 @@ const Dashboard = () => {
                     <span className="text-sm">{formatTime(tapCooldown)}</span>
                   </div>
                 )}
-              </Button>
+              </button>
               
               {/* Pulsating rings for active button */}
               {canTap && (
