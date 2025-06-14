@@ -12,7 +12,6 @@ const Dashboard = () => {
   const [watchedToday, setWatchedToday] = useState(8);
   const [dailyGoal] = useState(15);
   const [timeOfDay, setTimeOfDay] = useState('');
-  const [tapCooldown, setTapCooldown] = useState(0);
   const [mascotCelebrate, setMascotCelebrate] = useState(false);
   const [dailyCoinsEarned, setDailyCoinsEarned] = useState(45);
   const [dailyCoinTarget] = useState(100);
@@ -43,22 +42,14 @@ const Dashboard = () => {
 
   const handleTapToEarn = () => {
     console.log('Tap button clicked!');
-    console.log('Cooldown status:', tapCooldown);
-    
-    if (tapCooldown > 0) {
-      console.log('Tap blocked by cooldown');
-      return;
-    }
-    
     console.log('Processing tap...');
     
-    // Add 1 coin
+    // Add 1 coin instantly - no cooldown
     setCoins(prev => {
       console.log('Updating coins from', prev, 'to', prev + 1);
       return prev + 1;
     });
     setDailyCoinsEarned(prev => Math.min(prev + 1, dailyCoinTarget));
-    setTapCooldown(5); // 5 second cooldown
     
     // Trigger mascot celebration
     setMascotCelebrate(true);
@@ -99,11 +90,7 @@ const Dashboard = () => {
 
       {/* Enhanced Tap to Earn Section */}
       <div className="flex justify-center py-8">
-        <TapToEarnButton
-          onTap={handleTapToEarn}
-          disabled={!canTap}
-          cooldownTime={tapCooldown}
-        />
+        <TapToEarnButton onTap={handleTapToEarn} />
       </div>
 
       {/* Daily Progress Tracker */}
