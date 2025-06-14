@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Coins, Gift, Rocket, Wallet, Play } from 'lucide-react';
 import { Progress } from '@/components/ui/progress';
@@ -76,7 +77,7 @@ const Dashboard = () => {
             </span>
             <span className="text-lg text-gray-300">Coins</span>
           </div>
-          <p className="text-green-400 text-xs mt-1">≈ ${(displayCoins * 0.01).toFixed(2)} USD</p>
+          <p className="text-green-400 text-sm mt-1">(${(displayCoins / 1000).toFixed(3)} USD)</p>
         </div>
       </div>
 
