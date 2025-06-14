@@ -66,7 +66,7 @@ const WalletPage = () => {
             </div>
             <div className="bg-white/10 rounded-lg p-3">
               <p className="text-2xl font-bold text-green-400">${usdValue.toFixed(2)}</p>
-              <p className="text-gray-400 text-sm">USD Value (≈ $0.001 per coin)</p>
+              <p className="text-gray-400 text-sm">USD Value (1000 coins = $1)</p>
             </div>
           </div>
         </CardContent>
@@ -148,16 +148,16 @@ const WalletPage = () => {
         </CardHeader>
         <CardContent className="space-y-3">
           <div className="flex justify-between items-center p-3 bg-gradient-to-r from-purple-500/20 to-cyan-500/20 rounded-lg">
-            <span className="text-white">1 CoinCatch Token</span>
-            <span className="text-green-400 font-bold">= $0.01 USD</span>
+            <span className="text-white">1,000 CoinCatch Tokens</span>
+            <span className="text-green-400 font-bold">= $1.00 USD</span>
+          </div>
+          <div className="flex justify-between items-center p-3 bg-white/5 rounded-lg">
+            <span className="text-white">500 Tokens</span>
+            <span className="text-green-400">= $0.50 USD</span>
           </div>
           <div className="flex justify-between items-center p-3 bg-white/5 rounded-lg">
             <span className="text-white">100 Tokens</span>
-            <span className="text-green-400">= $1.00 USD</span>
-          </div>
-          <div className="flex justify-between items-center p-3 bg-white/5 rounded-lg">
-            <span className="text-white">1,000 Tokens</span>
-            <span className="text-green-400">= $10.00 USD</span>
+            <span className="text-green-400">= $0.10 USD</span>
           </div>
         </CardContent>
       </Card>
