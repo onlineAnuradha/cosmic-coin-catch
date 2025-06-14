@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import { Coins, Gift, Rocket, Wallet, Zap, Play } from 'lucide-react';
+import { Coins, Gift, Rocket, Wallet, Play } from 'lucide-react';
 import { Progress } from '@/components/ui/progress';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
+import { TapToEarnButton } from '@/components/TapToEarnButton';
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -13,11 +13,9 @@ const Dashboard = () => {
   const [dailyGoal] = useState(15);
   const [timeOfDay, setTimeOfDay] = useState('');
   const [tapCooldown, setTapCooldown] = useState(0);
-  const [coinAnimation, setCoinAnimation] = useState(false);
   const [mascotCelebrate, setMascotCelebrate] = useState(false);
   const [dailyCoinsEarned, setDailyCoinsEarned] = useState(45);
   const [dailyCoinTarget] = useState(100);
-  const [floatingCoins, setFloatingCoins] = useState<Array<{ id: number; x: number; y: number }>>([]);
 
   useEffect(() => {
     const hour = new Date().getHours();
@@ -62,24 +60,9 @@ const Dashboard = () => {
     setDailyCoinsEarned(prev => Math.min(prev + 1, dailyCoinTarget));
     setTapCooldown(5); // 5 second cooldown
     
-    // Trigger animations
-    setCoinAnimation(true);
+    // Trigger mascot celebration
     setMascotCelebrate(true);
-    
-    // Add floating +1 animation
-    const newFloatingCoin = {
-      id: Date.now(),
-      x: Math.random() * 100,
-      y: Math.random() * 50 + 25
-    };
-    setFloatingCoins(prev => [...prev, newFloatingCoin]);
-    
-    // Reset animations
-    setTimeout(() => setCoinAnimation(false), 1000);
     setTimeout(() => setMascotCelebrate(false), 2000);
-    setTimeout(() => {
-      setFloatingCoins(prev => prev.filter(coin => coin.id !== newFloatingCoin.id));
-    }, 2000);
   };
 
   const handleWatchAd = () => {
@@ -90,50 +73,12 @@ const Dashboard = () => {
     navigate('/watch');
   };
 
-  const formatTime = (seconds: number) => {
-    return `${seconds}s`;
-  };
-
   const progressPercentage = (watchedToday / dailyGoal) * 100;
   const dailyProgressPercentage = (dailyCoinsEarned / dailyCoinTarget) * 100;
   const canTap = tapCooldown === 0;
 
   return (
     <div className="space-y-6 animate-slide-up relative overflow-hidden min-h-screen">
-      {/* Floating +1 Coins */}
-      {floatingCoins.map((coin) => (
-        <div
-          key={coin.id}
-          className="fixed pointer-events-none z-50 animate-bounce text-2xl font-bold text-yellow-400"
-          style={{
-            left: `${coin.x}%`,
-            top: `${coin.y}%`,
-            animation: 'floatUp 2s ease-out forwards'
-          }}
-        >
-          +1 🪙
-        </div>
-      ))}
-
-      {/* Coin Burst Effect */}
-      {coinAnimation && (
-        <div className="fixed inset-0 pointer-events-none z-40">
-          {[...Array(6)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute top-1/2 left-1/2 animate-ping"
-              style={{
-                transform: `translate(-50%, -50%) rotate(${i * 60}deg) translateY(-80px)`,
-                animationDelay: `${i * 0.1}s`,
-                animationDuration: '0.8s',
-              }}
-            >
-              <Coins className="text-yellow-400 w-6 h-6" />
-            </div>
-          ))}
-        </div>
-      )}
-
       {/* Header with Live Balance */}
       <div className="text-center space-y-4">
         <h1 className="text-3xl font-bold gradient-text">
@@ -152,57 +97,14 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Main Tap to Earn Section */}
-      <Card className="glass-card relative overflow-hidden glow-effect">
-        <CardContent className="p-8 text-center">
-          <div className="space-y-6">
-            <h2 className="text-2xl font-bold gradient-text flex items-center justify-center gap-2">
-              <Zap className="text-yellow-400 animate-pulse" size={24} />
-              Tap to Earn Coins
-            </h2>
-            
-            <div className="relative">
-              <button
-                onClick={handleTapToEarn}
-                disabled={!canTap}
-                className={`w-40 h-40 rounded-full text-xl font-bold transition-all duration-300 ${
-                  canTap 
-                    ? 'bg-gradient-to-br from-yellow-400 via-orange-500 to-pink-500 hover:from-yellow-500 hover:via-orange-600 hover:to-pink-600 shadow-[0_0_50px_rgba(251,191,36,0.7)] animate-pulse-glow scale-100 hover:scale-105' 
-                    : 'bg-gray-600 cursor-not-allowed opacity-60'
-                } ${coinAnimation ? 'animate-bounce scale-110' : ''}`}
-              >
-                {canTap ? (
-                  <div className="flex flex-col items-center">
-                    <Coins size={36} className="mb-2" />
-                    <span className="text-lg font-black">TAP!</span>
-                    <span className="text-sm opacity-90">+1 Coin</span>
-                  </div>
-                ) : (
-                  <div className="flex flex-col items-center">
-                    <span className="text-3xl mb-2">⏰</span>
-                    <span className="text-sm">{formatTime(tapCooldown)}</span>
-                  </div>
-                )}
-              </button>
-              
-              {/* Pulsating rings for active button */}
-              {canTap && (
-                <>
-                  <div className="absolute inset-0 rounded-full border-4 border-yellow-400 animate-ping opacity-30"></div>
-                  <div className="absolute inset-2 rounded-full border-2 border-orange-400 animate-ping opacity-20" style={{ animationDelay: '0.5s' }}></div>
-                </>
-              )}
-            </div>
-
-            <p className="text-gray-300 text-sm max-w-xs mx-auto">
-              {canTap 
-                ? "Tap the button to earn 1 coin instantly! ⚡" 
-                : `Wait ${formatTime(tapCooldown)} before next tap`
-              }
-            </p>
-          </div>
-        </CardContent>
-      </Card>
+      {/* Enhanced Tap to Earn Section */}
+      <div className="flex justify-center py-8">
+        <TapToEarnButton
+          onTap={handleTapToEarn}
+          disabled={!canTap}
+          cooldownTime={tapCooldown}
+        />
+      </div>
 
       {/* Daily Progress Tracker */}
       <Card className="glass-card">
