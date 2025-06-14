@@ -1,14 +1,16 @@
+
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Coins, Wallet, Gift, ArrowUpRight, Clock } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { useCoinBalance } from '@/hooks/useCoinBalance';
 
 const WalletPage = () => {
   const { toast } = useToast();
-  const [coinBalance] = useState(1247);
-  const [usdValue] = useState(12.47);
+  const { balance: coinBalance } = useCoinBalance();
+  const usdValue = coinBalance / 1000; // 1000 coins = $1
   const [minimumWithdraw] = useState(1000);
 
   const walletOptions = [
@@ -64,7 +66,7 @@ const WalletPage = () => {
             </div>
             <div className="bg-white/10 rounded-lg p-3">
               <p className="text-2xl font-bold text-green-400">${usdValue.toFixed(2)}</p>
-              <p className="text-gray-400 text-sm">USD Value (≈ $0.01 per coin)</p>
+              <p className="text-gray-400 text-sm">USD Value (≈ $0.001 per coin)</p>
             </div>
           </div>
         </CardContent>

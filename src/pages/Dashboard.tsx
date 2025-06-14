@@ -5,11 +5,12 @@ import { Progress } from '@/components/ui/progress';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useNavigate } from 'react-router-dom';
 import { TapToEarnButton } from '@/components/TapToEarnButton';
+import { useCoinBalance } from '@/hooks/useCoinBalance';
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const [coins, setCoins] = useState(120);
-  const [displayCoins, setDisplayCoins] = useState(120);
+  const { balance: coins, addCoins } = useCoinBalance();
+  const [displayCoins, setDisplayCoins] = useState(coins);
   const [watchedToday, setWatchedToday] = useState(8);
   const [dailyGoal] = useState(15);
   const [timeOfDay, setTimeOfDay] = useState('');
@@ -34,15 +35,17 @@ const Dashboard = () => {
     }
   }, [displayCoins, coins]);
 
+  // Update displayCoins when coins change
+  useEffect(() => {
+    setDisplayCoins(coins);
+  }, [coins]);
+
   const handleTapToEarn = () => {
     console.log('Tap button clicked!');
     console.log('Processing tap...');
     
     // Add 1 coin instantly - no cooldown
-    setCoins(prev => {
-      console.log('Updating coins from', prev, 'to', prev + 1);
-      return prev + 1;
-    });
+    addCoins(1);
     setDailyCoinsEarned(prev => Math.min(prev + 1, dailyCoinTarget));
     
     // Trigger mascot celebration
@@ -52,7 +55,7 @@ const Dashboard = () => {
 
   const handleWatchAd = () => {
     // Add 10 coins from ad
-    setCoins(prev => prev + 10);
+    addCoins(10);
     setDailyCoinsEarned(prev => Math.min(prev + 10, dailyCoinTarget));
     setWatchedToday(prev => prev + 1);
     navigate('/watch');
