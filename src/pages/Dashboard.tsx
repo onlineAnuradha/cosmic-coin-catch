@@ -23,13 +23,6 @@ const Dashboard = () => {
     else setTimeOfDay('evening');
   }, []);
 
-  useEffect(() => {
-    if (tapCooldown > 0) {
-      const timer = setTimeout(() => setTapCooldown(tapCooldown - 1), 1000);
-      return () => clearTimeout(timer);
-    }
-  }, [tapCooldown]);
-
   // Animate balance number increase
   useEffect(() => {
     if (displayCoins < coins) {
@@ -66,7 +59,6 @@ const Dashboard = () => {
 
   const progressPercentage = (watchedToday / dailyGoal) * 100;
   const dailyProgressPercentage = (dailyCoinsEarned / dailyCoinTarget) * 100;
-  const canTap = tapCooldown === 0;
 
   return (
     <div className="space-y-6 animate-slide-up relative overflow-hidden min-h-screen">
