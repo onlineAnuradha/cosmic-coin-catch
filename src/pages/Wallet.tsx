@@ -1,9 +1,8 @@
-
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Coin, Wallet, Gift, ArrowUpRight, Clock } from 'lucide-react';
+import { Coins, Wallet, Gift, ArrowUpRight, Clock } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 const WalletPage = () => {
@@ -56,7 +55,7 @@ const WalletPage = () => {
           <div className="text-center space-y-4">
             <div className="flex justify-center">
               <div className="w-20 h-20 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full flex items-center justify-center">
-                <Coin className="text-white animate-pulse-glow" size={40} />
+                <Coins className="text-white animate-pulse-glow" size={40} />
               </div>
             </div>
             <div>
@@ -181,7 +180,7 @@ const WalletPage = () => {
               </div>
               <div className="text-right">
                 <div className="flex items-center space-x-1 text-green-400">
-                  <Coin size={16} />
+                  <Coins size={16} />
                   <span className="font-bold">+{tx.amount}</span>
                 </div>
                 <Badge className="bg-green-500 text-white text-xs">

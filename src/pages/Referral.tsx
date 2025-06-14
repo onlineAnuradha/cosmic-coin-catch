@@ -1,9 +1,8 @@
-
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Users, Gift, Coin, Copy, Share2 } from 'lucide-react';
+import { Users, Gift, Coins, Copy, Share2, Trophy } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 const Referral = () => {
@@ -61,7 +60,7 @@ const Referral = () => {
         
         <Card className="glass-card">
           <CardContent className="p-4 text-center">
-            <Coin className="text-green-400 mx-auto mb-2" size={32} />
+            <Coins className="text-green-400 mx-auto mb-2" size={32} />
             <p className="text-2xl font-bold text-white">{referralStats.totalEarned}</p>
             <p className="text-xs text-gray-400">Coins Earned</p>
           </CardContent>
@@ -196,7 +195,7 @@ const Referral = () => {
                 <span className="text-white">Milestone Bonus</span>
               </div>
               <div className="flex items-center space-x-1 text-yellow-400">
-                <Coin size={16} />
+                <Coins size={16} />
                 <span className="font-bold">+{tier.bonus}</span>
               </div>
             </div>

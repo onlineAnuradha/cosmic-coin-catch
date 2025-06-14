@@ -1,7 +1,6 @@
-
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Trophy, Coin, Users } from 'lucide-react';
+import { Trophy, Coins, Users } from 'lucide-react';
 
 const Leaderboard = () => {
   const topEarners = [
@@ -50,7 +49,7 @@ const Leaderboard = () => {
         
         <Card className="glass-card">
           <CardContent className="p-4 text-center">
-            <Coin className="text-green-400 mx-auto mb-2" size={32} />
+            <Coins className="text-green-400 mx-auto mb-2" size={32} />
             <p className="text-2xl font-bold text-white">1,247</p>
             <p className="text-xs text-gray-400">Your Coins</p>
           </CardContent>
@@ -128,7 +127,7 @@ const Leaderboard = () => {
                 </div>
                 <div className="flex items-center space-x-4 text-xs text-gray-400">
                   <div className="flex items-center space-x-1">
-                    <Coin size={12} className="text-yellow-400" />
+                    <Coins size={12} className="text-yellow-400" />
                     <span>{user.coins.toLocaleString()}</span>
                   </div>
                   <div className="flex items-center space-x-1">

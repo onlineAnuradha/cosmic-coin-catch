@@ -1,10 +1,9 @@
-
 import { NavLink } from 'react-router-dom';
-import { Coin, Wallet, Trophy, Users, Rocket } from 'lucide-react';
+import { Coins, Wallet, Trophy, Users, Rocket } from 'lucide-react';
 
 export const Navbar = () => {
   const navItems = [
-    { path: '/', icon: Coin, label: 'Home' },
+    { path: '/', icon: Coins, label: 'Home' },
     { path: '/watch', icon: Rocket, label: 'Watch' },
     { path: '/leaderboard', icon: Trophy, label: 'Leaderboard' },
     { path: '/referral', icon: Users, label: 'Referral' },

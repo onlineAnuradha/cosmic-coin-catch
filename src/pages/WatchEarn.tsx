@@ -1,9 +1,8 @@
-
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Coin, Rocket, Gift } from 'lucide-react';
+import { Coins, Rocket, Gift } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 const WatchEarn = () => {
@@ -72,7 +71,7 @@ const WatchEarn = () => {
                 </div>
               </div>
               <div className="flex items-center justify-center space-x-2 text-yellow-400">
-                <Coin size={20} />
+                <Coins size={20} />
                 <span className="font-bold">Reward: {currentAd.reward} coins</span>
               </div>
             </div>
@@ -109,7 +108,7 @@ const WatchEarn = () => {
                   
                   <div className="text-right">
                     <div className="flex items-center space-x-1 text-yellow-400 mb-2">
-                      <Coin size={16} />
+                      <Coins size={16} />
                       <span className="font-bold">{ad.reward}</span>
                     </div>
                     <Button

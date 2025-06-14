@@ -1,6 +1,5 @@
-
 import { useState, useEffect } from 'react';
-import { Coin, Gift, Rocket, Wallet } from 'lucide-react';
+import { Coins, Gift, Rocket, Wallet } from 'lucide-react';
 import { Progress } from '@/components/ui/progress';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -39,7 +38,7 @@ const Dashboard = () => {
             <div>
               <p className="text-gray-400 text-sm">Your Balance</p>
               <div className="flex items-center space-x-2">
-                <Coin className="text-yellow-400 animate-pulse-glow" size={32} />
+                <Coins className="text-yellow-400 animate-pulse-glow" size={32} />
                 <span className="text-4xl font-bold text-white">{coins.toLocaleString()}</span>
               </div>
             </div>
@@ -107,7 +106,7 @@ const Dashboard = () => {
                 <p className="text-xs text-gray-400">{activity.time}</p>
               </div>
               <div className="flex items-center space-x-1">
-                <Coin className="text-yellow-400" size={16} />
+                <Coins className="text-yellow-400" size={16} />
                 <span className="text-green-400 font-medium">+{activity.coins}</span>
               </div>
             </div>
